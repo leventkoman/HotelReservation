@@ -1,0 +1,104 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name  }} Profile{% endblock %}
+
+{% block body %}
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Reservation</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Aramak istediğiniz..." />
+                            <button class="btn btn-dark" type="submit">Ara</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                {{ include('user/usermenu.html.twig') }}
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Otel</th>
+                                        <th>Oda</th>
+                                        <th>İsim</th>
+                                        <th>Soyisim</th>
+                                        <th>Checkin</th>
+                                        <th>Checkout</th>
+                                        <th>Gün</th>
+                                        <th>Toplam</th>
+                                        <th>Mesaj</th>
+                                        <th>Note</th>
+                                        <th>Durum</th>
+                                        <th>Tarih</th>
+                                        <th>İşlem</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for rezervation in rezervations %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path("home_hotel_show",{"id":rezervation.hotelid}) }}">
+                                                    {{ rezervation.hname }}
+                                                </a>
+                                            </td>
+                                            <td>{{ rezervation.rname }}</td>
+                                            <td>{{ rezervation.name }}</td>
+                                            <td>{{ rezervation.surname }}</td>
+                                            <td>{{ rezervation.checkin|date('d-m-Y')}}</td>
+                                            <td>{{ rezervation.checkout|date('d-m-Y')}}</td>
+                                            <td>{{ rezervation.days }}</td>
+                                            <td>{{ rezervation.total }}</td>
+                                            <td>{{ rezervation.message }}</td>
+                                            <td>{{ rezervation.note }}</td>
+                                            <td>{{ rezervation.status }}</td>
+                                            <td>{{ rezervation.created_at }}</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="{{ path('user_rezervation_show', {'id': rezervation.id}) }}">Göster</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="19">Kayıt Bulunamadı</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

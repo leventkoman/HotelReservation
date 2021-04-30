@@ -1,0 +1,102 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Kategori Listele{% endblock %}
+
+{% block body %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="col-md-2">
+                <a class="btn btn-block btn-success" href="{{ path('admin_category_new') }}">Yeni Kategori</a>
+            </div>
+            <br>
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Kategoriler</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Parentid</th>
+                <th>Title</th>
+                <th>Keywords</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th colspan="3" ><div align="center">Actions</div></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.parentid }}</td>
+                <td>{{ category.title }}</td>
+                <td>{{ category.keywords }}</td>
+                <td>{{ category.description }}</td>
+                <td>{{ category.image }}</td>
+                <td>{{ category.status }}</td>
+                <td>
+                    <a class="btn btn-info " href="{{ path('admin_category_show', {'id': category.id}) }}">Göster</a>
+
+                </td>
+                <td>
+                    <a class="btn btn-info " href="{{ path('admin_category_edit', {'id': category.id}) }}">Düzenle</a>
+
+                </td>
+                <td>
+                    <a class="btn btn-danger " href="{{ path('admin_category_delete', {'id': category.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Kayıt Bulunamadı</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+            </div>
+        </div>
+
+    </section>
+</div>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}

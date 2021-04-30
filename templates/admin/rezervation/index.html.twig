@@ -1,0 +1,120 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Mesaj Listele{% endblock %}
+
+{% block body %}
+    <script language= JavaScript type= text/javascript>
+        function openWin(windowURl,windowName,windowFeatures){
+            window.open(windowURl,windowName,windowFeatures);
+        }
+    </script>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Rezervasyonlar</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+
+
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>Userid</th>
+                            <th>Hotelid</th>
+                            <th>Roomid</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+
+                            <th>Checkin</th>
+                            <th>Checkout</th>
+                            <th>Days</th>
+                            <th>Total</th>
+
+
+                            <th>Note</th>
+                            <th>Status</th>
+                            <th>Created_at</th>
+
+                            <th colspan="3" ><div align="center">Actions</div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rezervation in rezervations %}
+                            <tr>
+
+                                <td><a href="{{ path('admin_user_show', {'id': rezervation.userid}) }}">
+                                        {{ rezervation.username }}
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('admin_hotel_show', {'id': rezervation.hotelid}) }}">
+                                        {{ rezervation.hname }}
+                                    </a>
+                                </td>
+                                <td>{{ rezervation.rname }}</td>
+                                <td>{{ rezervation.name }}</td>
+                                <td>{{ rezervation.surname }}</td>
+
+                                <td>{{ rezervation.checkin ? rezervation.checkin|date('d-m-y') : '' }}</td>
+                                <td>{{ rezervation.checkout ? rezervation.checkout|date('d-m-y') : '' }}</td>
+                                <td>{{ rezervation.days }}</td>
+                                <td>{{ rezervation.total }}</td>
+
+                                <td>{{ rezervation.note }}</td>
+                                <td>{{ rezervation.status }}</td>
+                                <td>{{ rezervation.created_at ? rezervation.created_at|date('d-m-y') : '' }}</td>
+
+                                <td>
+                                    <a  class="btn btn-info" href="{{ path('admin_rezervation_show', {'id': rezervation.id}) }}">Göster</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('admin_rezervation_edit', {'id': rezervation.id}) }}">Düzenle</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="19">Kayıt Bulunamadı</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

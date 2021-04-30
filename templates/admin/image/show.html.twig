@@ -1,0 +1,75 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Resim{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Resimler</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <table id="example2" class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ image.title }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('uploads/images/' ~ image.image )}}" height="100">  </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-block btn-info" href="{{ path('admin_image_index') }}">Listeye Dön</a>
+
+    <a class="btn btn-block btn-info" href="{{ path('admin_image_edit', {'id': image.id}) }}">Düzenle</a>
+
+    {{ include('admin/image/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </section>
+</div>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}

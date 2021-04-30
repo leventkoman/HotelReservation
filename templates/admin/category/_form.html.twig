@@ -1,0 +1,80 @@
+{#{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Kaydet') }}</button>
+{{ form_end(form) }}#}
+
+
+    <form name="category" method="post" >
+        <div class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Parent</label>
+                <select id="category_parentid" name="category[parentid]" class="form-control">
+                <option value="0">Main Category</option>
+                  {% for cat in categories%}
+                      <option value="{{ cat.id }}"{{ cat.id==category.parentid ? 'Selected': ''}}>{{ cat.title}}</option>
+                  {% endfor%}
+                  </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Category Name</label>
+               <input type="text" class="form-control" id="category_title" name="category[title]" value="{{ category.title }}"required="required" maxlength="150">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Keywords</label>
+               <input type="text" class="form-control" id="category_keywords" name="category[keywords]" value="{{ category.keywords }}" maxlength="255" >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+               <input type="text" class="form-control" id="category_description" name="category[description]" value="{{ category.description }}" maxlength="255">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="category[image]" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                    </div>
+                </div>
+            </div>
+{#            <div class="form-group">
+                <label for="exampleInputFile">Image</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="category_image" name="category[image]" maxlength="75" >
+                        <label class="custom-file-label" for="exampleInputFile"></label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="">Yükle</span>
+                    </div>
+                </div>
+            </div>#}
+            <div class="form-group">
+                <label for="exampleInputPassword1">Status</label>
+                <select id="category_status" name="category[status]" class="form-control">
+                <option> {{ category.status }}</option>
+                <option> True</option>
+                <option> False</option>
+                  </select>
+            </div>
+        </div>
+
+            <button class="btn btn-block btn-primary">Kaydet</button>
+<br>
+
+    </form>
+<script src="{{ asset('assets') }}/admin/plugins/jquery/jquery.min.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="{{ asset('assets') }}/admin/dist/js/adminlte.min.js"></script>
+<script src=".{{ asset('assets') }}/admin/dist/js/demo.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+

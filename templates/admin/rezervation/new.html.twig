@@ -1,0 +1,49 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Yeni Rezervasyon{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Rezervasyon Oluştur</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+
+    {{ include('admin/rezervation/_form.html.twig') }}
+
+    <a href="{{ path('admin_rezervation_index') }}">back to list</a>
+            </div>
+        </div>
+
+    </section>
+</div>
+    <script src="{{ asset('assets') }}/admin/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets') }}/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="{{ asset('assets') }}/admin/dist/js/adminlte.min.js"></script>
+    <script src=".{{ asset('assets') }}/admin/dist/js/demo.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name  }} Profile{% endblock %}
+
+{% block body %}
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin( windowURL, windowName, windowFeatures ) { window.open( windowURL, windowName, windowFeatures ) ; 	}
+    </SCRIPT>
+    <!-- Subintro
+    ================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">User</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Kullanıcı Otel Detay</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Aramak istediğiniz..." />
+                            <button class="btn btn-dark" type="submit">Ara</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                {{ include('user/usermenu.html.twig') }}
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3><a href="#">Kullanıcı Otel Detay</a></h3>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Otel İsmi</th>
+                                        <td>{{ hotel.title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Açıklama</th>
+                                        <td>{{ hotel.description }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Star</th>
+                                        <td>{{ hotel.star }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Adres</th>
+                                        <td>{{ hotel.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Şehir</th>
+                                        <td>{{ hotel.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Telefon</th>
+                                        <td>{{ hotel.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ hotel.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fax</th>
+                                        <td>{{ hotel.fax }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ülke</th>
+                                        <td>{{ hotel.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Location</th>
+                                        <td>{{ hotel.location }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Detay</th>
+                                        <td>{{ hotel.detail }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Resim</th>
+                                        <td><img style="width: 200px;height: 200px;" src="{{ asset('uploads/images/'~ hotel.image) }}"  alt="User Image"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <a class="btn btn-block btn-info" href="{{ path('userhotel_index') }}">Listeye Dön</a>
+
+                                <a class="btn btn-block btn-info" href="{{ path('userhotel_edit', {'id': hotel.id}) }}">Düzenle</a>
+                                <br>
+
+                                {{ include('hotel/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+

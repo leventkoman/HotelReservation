@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link href="{{ asset('assets') }}/home/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="{{ asset('assets') }}/home/assets/css/bootstrap-responsive.css" rel="stylesheet">
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>

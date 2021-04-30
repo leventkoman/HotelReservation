@@ -1,0 +1,81 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ asset('assets') }}/admin/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="{{ asset('assets') }}/admin/dist/css/adminlte.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+<div class="card card-primary">
+
+    <form role="form" name="image" method="post" action="{{ path('admin_image_new', {'id': id}) }}"  enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Title</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="image_title" name="image[title]" maxlength="50">
+                    <input class="form-control" type="hidden" id="image_hotel" name="image[hotel]" value="{{ id }}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Image Gallery</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image[image]" id="image_image">
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-block btn-primary">Kaydet</button>
+        </div>
+    </form>
+</div>
+
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image.id }}</td>
+                <td>{{ image.title }}</td>
+                <td>
+                    <img src="{{ asset('uploads/images/' ~ image.image) }}" height="60">
+                </td>
+                <td>
+                    <form method="post" action="{{ path('admin_image_delete', {'id': image.id,'hid': id},) }}" onsubmit="return confirm('Bu içeriği silmek istediğinize emin misiniz?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                        <button class="btn btn-danger">Sil</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Kayıt Bulunamadı</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+
